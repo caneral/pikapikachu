@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 
 const App = () => {
   return (
-      <View>
+      <View style={styles.container}>
         <StatusBar backgroundColor={'white'} />
         <Pokemons />
       </View>
@@ -14,4 +14,8 @@ const App = () => {
 
 export default App;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex:1
+  }
+});
