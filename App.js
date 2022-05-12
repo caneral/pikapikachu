@@ -1,16 +1,17 @@
-import { StyleSheet, StatusBar, Text, View } from 'react-native'
-import React from 'react'
-import Pokemons from './src/screens/Pokemons'
+import {StyleSheet, StatusBar, Text, View} from 'react-native';
+import React from 'react';
+import Pokemons from './src/screens/Pokemons';
+import {Provider} from 'react-redux';
 
 const App = () => {
   return (
-    <View>
-      <StatusBar backgroundColor={'white'}/>
-      <Pokemons/>
-    </View>
-  )
-}
+      <View>
+        <StatusBar backgroundColor={'white'} />
+        <Pokemons />
+      </View>
+  );
+};
 
-export default App
+export default App;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

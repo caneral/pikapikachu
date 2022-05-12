@@ -1,8 +1,18 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Card from '../components/Card';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAllPokemon} from '../redux/actions/pokemon';
 
 const Pokemons = () => {
+  const dispatch = useDispatch();
+  const store = useSelector(state => state.pokemons);
+
+  useEffect(() => {
+    dispatch(getAllPokemon());
+  }, [dispatch, store.data.length]);
+
+  console.log(store);
   return (
     <View>
       <Text>Pokemons</Text>
@@ -18,7 +28,7 @@ const Pokemons = () => {
 export default Pokemons;
 
 const styles = StyleSheet.create({
-    container: {
-        padding:20,
-    }
+  container: {
+    padding: 20,
+  },
 });
