@@ -26,7 +26,6 @@ const Pokemons = ({navigation}) => {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    console.log('Caner', typeof searchTerm);
     searchTerm
       ? dispatch(searchPokemons(searchTerm))
       : dispatch(getAllPokemon(limit, offset));
@@ -48,9 +47,8 @@ const Pokemons = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View>
+      <View style={styles.header}>
         <Text style={styles.headerTitle}>Pika Pikachu App</Text>
-        <Text>Search for a pokemon you want.</Text>
       </View>
       <SearchBox placeholder="Search Pokemon" onChangeText={setSearchTerm} />
       <View style={styles.pokemons}>
@@ -74,11 +72,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#f6f8fc',
   },
   headerTitle: {
     fontWeight: '900',
     fontSize: 28,
     color: 'black',
+    textAlign: 'center',
   },
   pokemons: {
     flex: 1,

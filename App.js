@@ -5,7 +5,7 @@ import PokemonStack from './src/navigation/PokemonStack';
 const App = () => {
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={'white'} />
+      <StatusBar hidden={true} backgroundColor={'#f6f8fc'} />
       <PokemonStack />
     </View>
   );
