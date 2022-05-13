@@ -5,7 +5,12 @@ const initialState = {
 const pokemons = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_ALL_POKEMON':
-      return {...state, data: action.data};
+      if (state.data?.length === 0) {
+        return {...state, data: action.data.results};
+      } else {
+        const newData = state.data.concat(action.data?.results);
+        return {...state, data: newData};
+      }
 
     default:
       return {...state};

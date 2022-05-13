@@ -1,9 +1,9 @@
 import { api } from "./api";
 
 const pokemonApi = {
-  getAllPokemon: () => {
+  getAllPokemon: (limit, offset) => {
     const url = 'pokemon';
-    return api.get(url, {params: {}});
+    return api.get(url, {params: {limit:limit, offset:offset}});
   },
 };
 
