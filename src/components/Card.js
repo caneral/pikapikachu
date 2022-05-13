@@ -1,12 +1,14 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {POKEMON_FRONT_DEFAULT_PATH} from '../configs/api';
-import { useState } from 'react';
+import {useState} from 'react';
 
 const Card = ({item, navigation}) => {
   const url = item.url;
   const pokemonId = url.split('/').slice(6, 7).toString();
-  const pokemonName = item.name.charAt(0).toUpperCase() + item.name.slice(1);
+  const pokemonName =
+    item.name.charAt(0).toUpperCase() +
+    (item.name.length > 10 ? item.name.slice(1, 9) : item.name.slice(1));
 
   const [color, setColor] = useState();
 
@@ -19,13 +21,13 @@ const Card = ({item, navigation}) => {
   };
 
   useEffect(() => {
-    setColor(randomColor())
-  },[])
+    setColor(randomColor());
+  }, []);
 
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('PokemonDetail')}
-      style={styles.card(color || "white")}>
+      style={styles.card(color || 'white')}>
       <View>
         <Text style={styles.subtitle}>#{pokemonId}</Text>
         <Text style={styles.title}>{pokemonName}</Text>

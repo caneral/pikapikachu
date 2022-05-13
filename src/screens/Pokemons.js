@@ -9,28 +9,35 @@ import {
 import React, {useEffect, useState} from 'react';
 import Card from '../components/Card';
 import {useDispatch, useSelector} from 'react-redux';
-import {getAllPokemon} from '../redux/actions/pokemon';
+import {getAllPokemon, searchPokemons} from '../redux/actions/pokemon';
+import SearchBox from '../components/SearchBox';
 
 const Pokemons = ({navigation}) => {
   const dispatch = useDispatch();
   const store = useSelector(state => state.pokemons);
   const pokemons = store?.data;
+  const searchData = store?.searchData;
+
   const loading = store?.loading;
+  const [searchTerm, setSearchTerm] = useState('');
 
   // For InfiniteScroll
   const [limit, setLimit] = useState(20);
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    dispatch(getAllPokemon(limit, offset));
-  }, [dispatch, offset]);
+    console.log('Caner', typeof searchTerm);
+    searchTerm
+      ? dispatch(searchPokemons(searchTerm))
+      : dispatch(getAllPokemon(limit, offset));
+  }, [offset, searchTerm]);
 
   const getMorePokemon = () => {
-    setOffset(offset + 20);
+    !searchTerm && setOffset(offset + 20);
   };
 
   const footerIndicator = () => {
-    return loading ? (
+    return loading && !searchTerm ? (
       <View
         style={{
           paddingVertical: 20,
@@ -39,21 +46,22 @@ const Pokemons = ({navigation}) => {
       </View>
     ) : null;
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <View>
         <Text style={styles.headerTitle}>Pika Pikachu App</Text>
         <Text>Search for a pokemon you want.</Text>
       </View>
+      <SearchBox placeholder="Search Pokemon" onChangeText={setSearchTerm} />
       <View style={styles.pokemons}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={pokemons}
+          data={searchTerm ? searchData : pokemons}
           renderItem={({item}) => <Card item={item} navigation={navigation} />}
           numColumns={2}
           onEndReached={getMorePokemon}
           ListFooterComponent={footerIndicator}
+          onEndReachedThreshold={0.9}
         />
       </View>
     </SafeAreaView>

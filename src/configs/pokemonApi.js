@@ -5,6 +5,10 @@ const pokemonApi = {
     const url = 'pokemon';
     return api.get(url, {params: {limit:limit, offset:offset}});
   },
+  searchPokemons: () => {
+    const url = 'pokemon';
+    return api.get(url, {params: {limit:50}})
+  }
 };
 
 export default pokemonApi;
