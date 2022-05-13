@@ -26,7 +26,7 @@ const Card = ({item, navigation}) => {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('PokemonDetail')}
+      onPress={() => navigation.navigate('PokemonDetail', {color, pokemonId, pokemonName})}
       style={styles.card(color || 'white')}>
       <View>
         <Text style={styles.subtitle}>#{pokemonId}</Text>

@@ -8,6 +8,10 @@ const pokemonApi = {
   searchPokemons: () => {
     const url = 'pokemon';
     return api.get(url, {params: {limit:50}})
+  },
+  getPokemon: (id) => {
+    const url = `pokemon/${id}`;
+    return api.get(url, {params: {}})
   }
 };
 

@@ -32,3 +32,14 @@ export const searchPokemons = searchTerm => {
     });
   };
 };
+
+export const getPokemon = id => {
+  return async dispatch => {
+    await pokemonApi.getPokemon(id).then(response => {
+      dispatch({
+        type: 'GET_POKEMON',
+        data: response.data,
+      });
+    });
+  };
+};

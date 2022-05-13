@@ -2,6 +2,7 @@ const initialState = {
   data: [],
   loading: false,
   searchData: [],
+  pokemonData: [],
 };
 
 const pokemons = (state = initialState, action) => {
@@ -13,9 +14,10 @@ const pokemons = (state = initialState, action) => {
         const newData = state.data.concat(action.data?.results);
         return {...state, data: newData, loading: action.loading};
       }
+    case 'GET_POKEMON':
+      return {...state, pokemonData: action.data};
     case 'SEARCH_POKEMONS':
       if (action.searchTerm) {
-        console.log(action.data.results);
         const data = action.data.results.filter(item => {
           const startCondition = item.name
             .toLowerCase()
