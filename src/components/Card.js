@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {POKEMON_FRONT_DEFAULT_PATH} from '../configs/api';
 
-const Card = ({item}) => {
+const Card = ({item, navigation}) => {
   const url = item.url;
   const pokemonId = url.split('/').slice(6, 7).toString();
   const pokemonName = item.name.charAt(0).toUpperCase() + item.name.slice(1);
@@ -16,7 +16,9 @@ const Card = ({item}) => {
   };
 
   return (
-    <TouchableOpacity style={styles.card(randomColor())}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('PokemonDetail')}
+      style={styles.card(randomColor())}>
       <View>
         <Text style={styles.subtitle}>#{pokemonId}</Text>
         <Text style={styles.title}>{pokemonName}</Text>
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 1,
     margin: 4,
-    height:80
+    height: 80,
   }),
   title: {
     fontSize: 18,

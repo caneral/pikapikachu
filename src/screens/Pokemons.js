@@ -4,7 +4,7 @@ import Card from '../components/Card';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllPokemon} from '../redux/actions/pokemon';
 
-const Pokemons = () => {
+const Pokemons = ({navigation}) => {
   const dispatch = useDispatch();
   const store = useSelector(state => state.pokemons);
   const pokemons = store.data.results;
@@ -23,7 +23,7 @@ const Pokemons = () => {
         <FlatList
           showsVerticalScrollIndicator={false}
           data={pokemons}
-          renderItem={({item}) => <Card item={item} />}
+          renderItem={({item}) => <Card item={item} navigation={navigation} />}
           numColumns={2}
         />
       </View>
