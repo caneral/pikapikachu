@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  SafeAreaView,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Card from '../components/Card';
 import {useDispatch, useSelector} from 'react-redux';
@@ -8,7 +15,7 @@ const Pokemons = ({navigation}) => {
   const dispatch = useDispatch();
   const store = useSelector(state => state.pokemons);
   const pokemons = store?.data;
-  const [data, setData] = useState();
+  const loading = store?.loading;
 
   // For InfiniteScroll
   const [limit, setLimit] = useState(20);
@@ -16,18 +23,22 @@ const Pokemons = ({navigation}) => {
 
   useEffect(() => {
     dispatch(getAllPokemon(limit, offset));
-    console.log('UseEffect çalıştı.');
   }, [dispatch, offset]);
 
-
-  
   const getMorePokemon = () => {
-    // setLimit(limit + 20);
     setOffset(offset + 20);
-    console.log('GetMorePokemon');
   };
 
-  console.log(offset);
+  const footerIndicator = () => {
+    return loading ? (
+      <View
+        style={{
+          paddingVertical: 20,
+        }}>
+        <ActivityIndicator animating size="large" />
+      </View>
+    ) : null;
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -42,6 +53,7 @@ const Pokemons = ({navigation}) => {
           renderItem={({item}) => <Card item={item} navigation={navigation} />}
           numColumns={2}
           onEndReached={getMorePokemon}
+          ListFooterComponent={footerIndicator}
         />
       </View>
     </SafeAreaView>
