@@ -44,6 +44,8 @@ npx react-native run-android
 
 - PokeAPI
 
+- React Navigation
+
 
 ## License
 
